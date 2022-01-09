@@ -59,6 +59,34 @@ Group by Area
 order by PesticideUseValue DESC
 
 
+----calculating the total pesticide use as well as the year
+select count (*) Value, max(cast(Year as int)) as End_Year, min(cast(Year as int)) as Start_Year
+from [PesticideUse].[dbo].['FAOSTAT_data_1-9-2022$']
+order by 1, 2
+
+----calculating the total pesticide use as well as the year
+select  count (*) Flag, max(cast(Year as int)) as End_Year, min(cast(Year as int)) as Start_Year
+from [PesticideUse].[dbo].['FAOSTAT_data_1-9-2022$']
+where Flag = 'Qm' or 
+      Flag = 'Fc' or 
+	  Flag = 'F' or 
+	  Flag = 'A' or 
+	  Flag = 'I' 
+group by Flag
+order by 1, 2
+
+----calculating the total pesticide use as well as the year
+select Flag, max(cast(Year as int)) as End_Year, min(cast(Year as int)) as Start_Year
+from [PesticideUse].[dbo].['FAOSTAT_data_1-9-2022$']
+where Flag = 'Qm' or 
+      Flag = 'Fc' or 
+	  Flag = 'F' or 
+	  Flag = 'A' or
+	  Flag = 'I'
+group by Flag
+order by 1, 2
+
+
 -----looking deeper into the year
 Select Area, Year, Value
 from [PesticideUse].[dbo].['FAOSTAT_data_1-9-2022$']
@@ -71,9 +99,3 @@ select Area, max(cast(Value as int)) as PesticideUseValue
 from [PesticideUse].[dbo].['FAOSTAT_data_1-9-2022$']
 Group by Area
 --order by PesticideUseValue DESC
-
-
-
-
-
------Grouping Area in different continents
